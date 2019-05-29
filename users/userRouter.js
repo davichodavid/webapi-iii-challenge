@@ -1,16 +1,28 @@
-const express = 'express';
+const express = require('express');
 
-const userData = require('./users/userDb');
-const postData = require('./posts/postDb');
+const userData = require('../users/userDb');
+const postData = require('../posts/postDb');
 
 const router = express.Router();
 
 router.post('/', (req, res) => {
-
+  userData.insert(req.body)
+    .then(users => {
+      res.json(users)
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err })
+    })
 });
 
 router.post('/:id/posts', (req, res) => {
-
+  userData.insert(req.body)
+    .then(user => {
+      res.json(user)
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err })
+    })
 });
 
 router.get('/', (req, res) => {
@@ -24,7 +36,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  userData.get(req.params.id)
+  userData.getById(req.params.id)
     .then(user => {
       res.json(user)
     })
@@ -34,7 +46,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/:id/posts', (req, res) => {
-  postData.get(req.params.id)
+  postData.getById(req.params.id)
     .then(post => {
       res.json(post);
     })
@@ -54,7 +66,10 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+  userData.update(req.params.id, req.body.name)
+    .then(user => {
 
+    })
 });
 
 //custom middleware
