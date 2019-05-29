@@ -1,4 +1,4 @@
-const express = 'express';
+const express = require('express');
 
 const server = express();
 
@@ -9,7 +9,11 @@ server.get('/', (req, res) => {
 //custom middleware
 
 function logger(req, res, next) {
-
+  const now = new Date().toISOString();
+  console.log(`This was a ${req.method} request from ${req.url} on ${now}`);
+  next();
 };
 
 module.exports = server;
+
+module.exports = logger;
