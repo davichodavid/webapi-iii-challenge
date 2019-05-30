@@ -21,6 +21,8 @@ server.use('/api/users', userRouter)
 //     })
 // })
 
-server.listen(5000, () => {
-  console.log('Hellurr from 5000')
+const port = process.env.PORT || 5000;
+
+server.listen(port, () => {
+  console.log(`Hellurr from ${port}`)
 });
